@@ -365,4 +365,62 @@ grant truncate on table "public"."auth_verification" to "service_role";
 
 grant update on table "public"."auth_verification" to "service_role";
 
+alter table "public"."auth_accounts" enable row level security;
+
+alter table "public"."auth_jwks" enable row level security;
+
+alter table "public"."auth_sessions" enable row level security;
+
+alter table "public"."auth_two_factor" enable row level security;
+
+alter table "public"."auth_users" enable row level security;
+
+alter table "public"."auth_verification" enable row level security;
+
+create policy "no_access_auth_accounts"
+on "public"."auth_accounts"
+as permissive
+for all
+to public
+using (false);
+
+
+create policy "no_access_auth_jwks"
+on "public"."auth_jwks"
+as permissive
+for all
+to public
+using (false);
+
+
+create policy "no_access_auth_sessions"
+on "public"."auth_sessions"
+as permissive
+for all
+to public
+using (false);
+
+
+create policy "no_access_auth_two_factor"
+on "public"."auth_two_factor"
+as permissive
+for all
+to public
+using (false);
+
+
+create policy "no_access_auth_users"
+on "public"."auth_users"
+as permissive
+for all
+to public
+using (false);
+
+
+create policy "no_access_auth_verification"
+on "public"."auth_verification"
+as permissive
+for all
+to public
+using (false);
 
