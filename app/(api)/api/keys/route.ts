@@ -12,7 +12,7 @@ import { kv } from "@vercel/kv";
 // Types
 import type { KeyData } from "@/utils/auth/keys";
 
-export const generateRandomString = createRandomStringGenerator(
+const generateRandomString = createRandomStringGenerator(
   "A-Z",
   "0-9",
   "a-z",
