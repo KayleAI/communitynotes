@@ -1,12 +1,15 @@
 import { type NextRequest, NextResponse } from "next/server";
 import { createSchema } from "../schemas";
 import { createSupaClient } from "@/utils/supabase/supa";
+
 import { validateApiKey } from "@/utils/auth/keys";
 
 export async function POST(request: NextRequest) {
-  const { error } = await validateApiKey(request);
+  const { data, error } = await validateApiKey(request);
 
-  if (error) {
+  const userId = data?.userId;
+
+  if (error || !userId) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
@@ -25,9 +28,43 @@ export async function POST(request: NextRequest) {
 
     const supa = createSupaClient();
 
-    // TODO: Implement note creation logic
+    let authorId = null;
 
-    return NextResponse.json({ status: "created", note });
+    if (note.author) {
+      const { data: author, error: authorError } = await supa.from(
+        "note_authors",
+      ).upsert({
+        user_id: userId,
+        external_id: note.author?.id,
+        name: note.author?.name,
+      }, {
+        onConflict: "external_id,user_id",
+        ignoreDuplicates: true,
+      }).select("id").single();
+
+      if (authorError) {
+        return NextResponse.json({ error: "Failed to create author" }, {
+          status: 500,
+        });
+      }
+
+      authorId = author?.id;
+    }
+
+    const { data, error } = await supa.from("notes").insert({
+      user_id: userId,
+      content_id: note.content_id,
+      context: note.context,
+      author_id: authorId,
+    }).select("id").single();
+
+    if (error) {
+      return NextResponse.json({ error: "Failed to create note" }, {
+        status: 500,
+      });
+    }
+
+    return NextResponse.json({ status: "created", id: data.id });
   } catch (error) {
     return NextResponse.json({ error: "Invalid JSON" }, { status: 400 });
   }

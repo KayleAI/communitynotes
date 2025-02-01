@@ -19,34 +19,32 @@ export interface KeyData {
   hash: string;
 }
 
-export async function validateApiKey(request: NextRequest): Promise<{
-  data: (KeyData & { userId: string }) | null;
-  error: string | null;
-}> {
-  const apiKey = request.headers.get("Authorization")?.replace("Bearer ", "");
-
-  if (!apiKey) {
-    return { data: null, error: "API key required" };
+export async function validateApiKey(request: NextRequest) {
+  const authHeader = request.headers.get("authorization");
+  if (!authHeader?.startsWith("Bearer ")) {
+    return { error: "Invalid authorization header", data: null };
   }
 
-  const keyHash = Buffer.from(await createHash("SHA-256").digest(apiKey))
-    .toString("hex");
-
-  const userId = await kv.get<string>(`key:${keyHash}`);
+  const key = authHeader.slice(7);
+  const hash = Buffer.from(await createHash("SHA-256").digest(key)).toString("hex");
+  
+  const userId = await kv.get<string>(`key:${hash}`);
   if (!userId) {
-    return { data: null, error: "Invalid API key" };
+    return { error: "Invalid API key", data: null };
   }
 
-  const keys = await kv.hgetall<Record<string, KeyData>>(`user:${userId}:keys`);
-  const keyData = Object.values(keys ?? {}).find((k) => k.hash === keyHash);
-
-  if (!keyData || keyData.status === "revoked") {
-    return { data: null, error: "Invalid or revoked API key" };
+  const keyData = await kv.hget<KeyData>(`user:${userId}:keys`, `id_${hash.slice(0, 16)}`);
+  if (!keyData || keyData.status !== "active") {
+    return { error: "Invalid or revoked API key", data: null };
   }
 
+  // Update last used timestamp
   await kv.hset(`user:${userId}:keys`, {
-    [keyData.id]: { ...keyData, lastUsed: Date.now() },
+    [`id_${hash.slice(0, 16)}`]: {
+      ...keyData,
+      lastUsed: Date.now(),
+    },
   });
 
-  return { data: { ...keyData, userId }, error: null };
+  return { error: null, data: { ...keyData, userId } };
 }
