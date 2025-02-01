@@ -172,7 +172,7 @@ export function CreateKeyButton() {
 				</DialogBody>
 				<DialogActions>
 					<Button onClick={handleCreatedKeyDialogClose}>
-						I've saved my key and I want to close this dialog.
+						I‘ve saved my key and I want to close this dialog.
 					</Button>
 				</DialogActions>
 			</Dialog>

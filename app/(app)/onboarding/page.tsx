@@ -23,7 +23,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
 	title: "How Community Notes works",
-	description: "Welcome to Community Notes! Here's how it works.",
+	description: "Welcome to Community Notes! Here‘s how it works.",
 };
 
 interface CommunityNote {
@@ -36,7 +36,7 @@ export default function Onboarding() {
 		<div className="max-w-xl mx-auto">
 			<PageHeading
 				title="How Community Notes works"
-				description="Welcome to Community Notes by Kayle! Here's how it works."
+				description="Welcome to Community Notes by Kayle! Here‘s how it works."
 			/>
 			<main className="flex flex-col gap-6 mt-6">
 				<div className="flex flex-col gap-6">
