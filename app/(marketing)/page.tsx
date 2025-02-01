@@ -31,7 +31,7 @@ function MarketingNavbar() {
 							d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"
 						/>
 					</svg>
-					<span className="font-semibold">CommunityNotes.dev</span>
+					<span className="font-semibold">Community Notes by Kayle</span>
 				</NavbarItem>
 			</NavbarSection>
 			<NavbarSpacer />
@@ -88,7 +88,7 @@ export default function MarketingPage() {
 				<div className="mx-auto max-w-2xl text-center">
 					<Badge className="mb-4">Now in beta</Badge>
 					<Heading level={1} className="mt-4 mb-6">
-						CommunityNotes.dev
+						Community Notes by Kayle
 					</Heading>
 					<Text className="mb-8">
 						Community Notes by Kayle uses the principles of Twitter‘s Community
@@ -112,9 +112,10 @@ export default function MarketingPage() {
 			<div className="py-24 sm:py-32">
 				<div className="mx-auto max-w-7xl">
 					<div className="text-center mb-16">
-						<Heading level={2}>Features</Heading>
-						<Text className="mt-4">
-							Everything you need to build modern web applications
+						<Heading level={2}>Why Choose Our Platform</Heading>
+						<Text>
+							Everything you need to implement community-driven content
+							moderation
 						</Text>
 					</div>
 
@@ -124,9 +125,7 @@ export default function MarketingPage() {
 								key={feature.title}
 								className="p-6 rounded-lg border border-zinc-950/10 dark:border-white/10"
 							>
-								<Heading level={3} className="mb-3">
-									{feature.title}
-								</Heading>
+								<Heading level={3}>{feature.title}</Heading>
 								<Text>{feature.description}</Text>
 							</div>
 						))}
@@ -137,13 +136,15 @@ export default function MarketingPage() {
 			{/* CTA Section */}
 			<div className="py-24 sm:py-32 border border-zinc-950/10 dark:border-white/10 rounded-lg">
 				<div className="mx-auto max-w-2xl text-center">
-					<Heading level={2} className="mb-4">
-						Ready to get started?
-					</Heading>
-					<Text className="mb-8">
-						Join thousands of developers building better applications
+					<Badge className="mb-4">Now in beta</Badge>
+					<Heading level={2}>Ready to get started?</Heading>
+					<Text className="mt-4">
+						Join forward-thinking platforms that trust their communities to
+						maintain content integrity
 					</Text>
-					<Button color="blue">Start Building Today</Button>
+					<Button color="blue" className="mt-8" href="/sign-in">
+						Start Building Today
+					</Button>
 				</div>
 			</div>
 		</StackedLayout>
@@ -152,17 +153,32 @@ export default function MarketingPage() {
 
 const features = [
 	{
-		title: "Modern Stack",
-		description:
-			"Built with Next.js, TypeScript, and Tailwind CSS for the best developer experience.",
+		title: "Easy Integration",
+		description: "A simple API that works with any platform or content type.",
 	},
 	{
-		title: "UI Components",
+		title: "Smart Rating System",
 		description:
-			"Beautifully designed components that work together seamlessly.",
+			"Advanced algorithms to surface the most helpful and accurate community contributions.",
 	},
 	{
-		title: "Fast & Reliable",
-		description: "Optimized for performance and reliability out of the box.",
+		title: "Trust & Safety",
+		description:
+			"Built-in safeguards and moderation tools to prevent abuse and maintain quality.",
+	},
+	{
+		title: "Real-time Updates",
+		description:
+			"Instant note visibility and dynamic content updates for fresh, relevant context.",
+	},
+	{
+		title: "Engagement Analytics",
+		description:
+			"Comprehensive metrics to track community participation and note effectiveness.",
+	},
+	{
+		title: "No UI",
+		description:
+			"How you want Community Notes to look is up to you, we just provide the service.",
 	},
 ];

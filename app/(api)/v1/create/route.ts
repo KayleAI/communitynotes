@@ -1,27 +1,34 @@
 import { type NextRequest, NextResponse } from "next/server";
 import { createSchema } from "../schemas";
 import { createSupaClient } from "@/utils/supabase/supa";
+import { validateApiKey } from "@/utils/auth/keys";
 
 export async function POST(request: NextRequest) {
-	try {
-		const body = await request.json();
-		const result = createSchema.safeParse(body);
+  const { error } = await validateApiKey(request);
 
-		if (!result.success) {
-			return NextResponse.json(
-				{ error: "Invalid input", details: result.error.issues },
-				{ status: 400 },
-			);
-		}
+  if (error) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
 
-		const { note } = result.data;
+  try {
+    const body = await request.json();
+    const result = createSchema.safeParse(body);
 
-		const supa = createSupaClient();
+    if (!result.success) {
+      return NextResponse.json(
+        { error: "Invalid input", details: result.error.issues },
+        { status: 400 },
+      );
+    }
 
-		// TODO: Implement note creation logic
+    const { note } = result.data;
 
-		return NextResponse.json({ status: "created", note });
-	} catch (error) {
-		return NextResponse.json({ error: "Invalid JSON" }, { status: 400 });
-	}
+    const supa = createSupaClient();
+
+    // TODO: Implement note creation logic
+
+    return NextResponse.json({ status: "created", note });
+  } catch (error) {
+    return NextResponse.json({ error: "Invalid JSON" }, { status: 400 });
+  }
 }

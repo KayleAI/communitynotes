@@ -33,7 +33,7 @@ export function Avatar({
 				"outline outline-offset-1 outline-black/(--ring-opacity) dark:outline-white/(--ring-opacity)",
 				// Add the correct border radius
 				square
-					? "rounded-(--avatar-radius) *:rounded-(--avatar-radius)"
+					? "rounded-[--avatar-radius:20%] *:rounded-[--avatar-radius:20%]"
 					: "rounded-full *:rounded-full",
 			)}
 		>

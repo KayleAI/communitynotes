@@ -5,7 +5,7 @@ import { Subheading } from "@/ui/heading";
 import { PageHeading } from "@/ui/page-heading";
 import { Text, TextLink } from "@/ui/text";
 
-export default function Home() {
+export default function HelpPage() {
 	return (
 		<div>
 			<PageHeading

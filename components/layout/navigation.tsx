@@ -4,7 +4,7 @@
 import { useCallback } from "react";
 
 // Next
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 
 // UI
 import { Avatar } from "@/ui/avatar";
@@ -41,6 +41,7 @@ import {
 	ArrowRightStartOnRectangleIcon,
 	ChevronUpIcon,
 	Cog8ToothIcon,
+	KeyIcon,
 	LightBulbIcon,
 	ShieldCheckIcon,
 } from "@heroicons/react/16/solid";
@@ -54,7 +55,6 @@ import {
 
 // Hooks
 import { useAuth } from "@/utils/auth/provider";
-import { useHotkeys } from "@mantine/hooks";
 import { useTheme } from "next-themes";
 import { StackedLayout } from "@/ui/stacked-layout";
 
@@ -64,7 +64,6 @@ export function Navigation({
 	children: React.ReactNode;
 }>) {
 	const { user } = useAuth();
-	const router = useRouter();
 	const pathname = usePathname();
 	const { resolvedTheme, setTheme } = useTheme();
 
@@ -74,17 +73,11 @@ export function Navigation({
 		console.warn("newTheme", newTheme);
 	}, [resolvedTheme, setTheme]);
 
-	const switchToHome = useCallback(() => {
-		router.push("/home");
-	}, [router]);
-
-	useHotkeys([["d", switchToHome]]);
-
 	return (
 		<StackedLayout
 			navbar={
 				<Navbar>
-					<NavbarSection>
+					<NavbarSection className="hidden md:contents">
 						<NavbarItem href="/home" current={pathname === "/home"}>
 							<HomeIcon />
 							<NavbarLabel>Home</NavbarLabel>
@@ -93,9 +86,13 @@ export function Navigation({
 							<SparklesIcon />
 							<NavbarLabel>Onboarding</NavbarLabel>
 						</NavbarItem>
-						<NavbarItem href="/support" current={pathname === "/support"}>
+						<NavbarItem href="/keys" current={pathname === "/keys"}>
+							<KeyIcon />
+							<NavbarLabel>Keys</NavbarLabel>
+						</NavbarItem>
+						<NavbarItem href="/help" current={pathname === "/help"}>
 							<QuestionMarkCircleIcon />
-							<NavbarLabel>Support</NavbarLabel>
+							<NavbarLabel>Help</NavbarLabel>
 						</NavbarItem>
 					</NavbarSection>
 					<NavbarSpacer />
@@ -106,12 +103,17 @@ export function Navigation({
 									src={user?.avatar ?? undefined}
 									className="size-10"
 									initials={!user?.avatar ? "A" : undefined}
+									square
 								/>
 							</DropdownButton>
 							<DropdownMenu className="min-w-64" anchor="bottom end">
 								<DropdownItem href="/settings">
 									<Cog8ToothIcon />
 									<DropdownLabel>Settings</DropdownLabel>
+								</DropdownItem>
+								<DropdownItem onClick={toggleTheme}>
+									{resolvedTheme === "dark" ? <SunIcon /> : <MoonIcon />}
+									<DropdownLabel>Toggle Theme</DropdownLabel>
 								</DropdownItem>
 								<DropdownDivider />
 								<DropdownItem href="/privacy">
@@ -157,7 +159,7 @@ export function Navigation({
 						</SidebarSection>
 						<SidebarSpacer />
 						<SidebarSection>
-							<SidebarItem href="/support" current={pathname === "/support"}>
+							<SidebarItem href="/help" current={pathname === "/help"}>
 								<QuestionMarkCircleIcon />
 								<SidebarLabel>Support</SidebarLabel>
 							</SidebarItem>
@@ -180,6 +182,7 @@ export function Navigation({
 										initials={
 											!user?.avatar ? user?.name?.[0]?.toUpperCase() : undefined
 										}
+										square
 										alt=""
 									/>
 									<span className="min-w-0">

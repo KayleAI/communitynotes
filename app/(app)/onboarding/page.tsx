@@ -36,7 +36,7 @@ export default function Onboarding() {
 		<div className="max-w-xl mx-auto">
 			<PageHeading
 				title="How Community Notes works"
-				description="Welcome to Community Notes! Here's how it works."
+				description="Welcome to Community Notes by Kayle! Here's how it works."
 			/>
 			<main className="flex flex-col gap-6 mt-6">
 				<div className="flex flex-col gap-6">
@@ -147,10 +147,10 @@ function SamplePost({
 					{/* Profile */}
 					<div className="flex flex-row gap-x-1">
 						<Text className="!text-black dark:!text-white font-medium">
-							Arsen Shkrumelyak
+							Arsen
 						</Text>
 						<Text>•</Text>
-						<Text>@arsenstormparody</Text>
+						<Text>@arsenparody</Text>
 						<Text>•</Text>
 						<Text>2h ago</Text>
 					</div>
@@ -160,7 +160,7 @@ function SamplePost({
 					{/* Community notes */}
 					{communityNote && (
 						<div className="mt-2">
-							<div className="flex flex-col bg-zinc-500/10 rounded-xl p-4 border border-zinc-500/20">
+							<div className="flex flex-col bg-zinc-500/5 rounded-xl p-4 border border-zinc-500/20">
 								<Subheading level={3}>Community notes</Subheading>
 								<div className="flex flex-col gap-y-2">
 									<Text>
@@ -170,7 +170,7 @@ function SamplePost({
 								</div>
 								<div
 									className={cn(
-										"flex flex-row justify-start items-center gap-x-2 mt-4 border border-current/20 bg-current/10 rounded-xl p-2",
+										"flex flex-row justify-start items-center gap-x-2 mt-4 border border-current/20 bg-current/5 rounded-lg p-2",
 										{
 											"text-emerald-500": communityNote.rank === "helpful",
 											"text-rose-700": communityNote.rank === "not_helpful",

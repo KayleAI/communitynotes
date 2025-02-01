@@ -12,17 +12,24 @@ import { AuthProvider } from "@/utils/auth/provider";
 // Nuqs
 import { NuqsAdapter } from "nuqs/adapters/next/app";
 
+// Tanstack Query
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
+const queryClient = new QueryClient();
+
 export default function Providers({
 	children,
 }: Readonly<{ children: React.ReactNode }>) {
 	return (
-		<NuqsAdapter>
-			<ThemeProvider defaultTheme="system" enableSystem>
-				<AuthProvider>
-					<OtherProviders>{children}</OtherProviders>
-				</AuthProvider>
-			</ThemeProvider>
-		</NuqsAdapter>
+		<QueryClientProvider client={queryClient}>
+			<NuqsAdapter>
+				<ThemeProvider defaultTheme="system" enableSystem>
+					<AuthProvider>
+						<OtherProviders>{children}</OtherProviders>
+					</AuthProvider>
+				</ThemeProvider>
+			</NuqsAdapter>
+		</QueryClientProvider>
 	);
 }
 
