@@ -12,9 +12,7 @@
 		"auth:migrate": "bunx @better-auth/cli@latest migrate --config ./auth.ts"
 	},
 	"dependencies": {
-		"@ai-sdk/anthropic": "^1.1.6",
 		"@ai-sdk/perplexity": "^0.0.6",
-		"@anthropic-ai/sdk": "^0.36.3",
 		"@better-auth/utils": "^0.2.3",
 		"@headlessui/react": "^2.2.0",
 		"@heroicons/react": "^2.2.0",
