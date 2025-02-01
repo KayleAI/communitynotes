@@ -21,13 +21,11 @@ export type RequestInput = z.infer<typeof requestSchema>;
 
 // Schema for creating a community note
 export const createSchema = z.object({
-  note: z.object({
-    context: z.string().min(1).max(2000), // this is the content of the note
-    content_id: z.string().min(1),
-    author: z.object({
-      id: z.string().min(1).optional(),
-      name: z.string().min(1).optional(),
-    }).optional().nullable(),
-  }),
+  context: z.string().min(1).max(2000), // this is the content of the note
+  content_id: z.string().min(1),
+  author: z.object({
+    id: z.string().min(1).optional(),
+    name: z.string().min(1).optional(),
+  }).optional().nullable(),
 });
 export type CreateInput = z.infer<typeof createSchema>;

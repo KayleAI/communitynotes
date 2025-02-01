@@ -24,19 +24,19 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const { note } = result.data;
+    const { author, content_id, context } = result.data;
 
     const supa = createSupaClient();
 
     let authorId = null;
 
-    if (note.author) {
-      const { data: author, error: authorError } = await supa.from(
+    if (author) {
+      const { data: authorData, error: authorError } = await supa.from(
         "note_authors",
       ).upsert({
         user_id: userId,
-        external_id: note.author?.id,
-        name: note.author?.name,
+        external_id: author?.id,
+        name: author?.name,
       }, {
         onConflict: "external_id,user_id",
         ignoreDuplicates: true,
@@ -48,13 +48,13 @@ export async function POST(request: NextRequest) {
         });
       }
 
-      authorId = author?.id;
+      authorId = authorData?.id;
     }
 
     const { data, error } = await supa.from("notes").insert({
       user_id: userId,
-      content_id: note.content_id,
-      context: note.context,
+      content_id: content_id,
+      context: context,
       author_id: authorId,
     }).select("id").single();
 
