@@ -17,7 +17,13 @@ import {
 	DropdownLabel,
 	DropdownMenu,
 } from "@/ui/dropdown";
-import { Navbar, NavbarItem, NavbarSection, NavbarSpacer } from "@/ui/navbar";
+import {
+	Navbar,
+	NavbarItem,
+	NavbarLabel,
+	NavbarSection,
+	NavbarSpacer,
+} from "@/ui/navbar";
 import {
 	Sidebar,
 	SidebarBody,
@@ -78,6 +84,20 @@ export function Navigation({
 		<StackedLayout
 			navbar={
 				<Navbar>
+					<NavbarSection>
+						<NavbarItem href="/home" current={pathname === "/home"}>
+							<HomeIcon />
+							<NavbarLabel>Home</NavbarLabel>
+						</NavbarItem>
+						<NavbarItem href="/onboarding" current={pathname === "/onboarding"}>
+							<SparklesIcon />
+							<NavbarLabel>Onboarding</NavbarLabel>
+						</NavbarItem>
+						<NavbarItem href="/support" current={pathname === "/support"}>
+							<QuestionMarkCircleIcon />
+							<NavbarLabel>Support</NavbarLabel>
+						</NavbarItem>
+					</NavbarSection>
 					<NavbarSpacer />
 					<NavbarSection>
 						<Dropdown>
@@ -86,7 +106,6 @@ export function Navigation({
 									src={user?.avatar ?? undefined}
 									className="size-10"
 									initials={!user?.avatar ? "A" : undefined}
-									square
 								/>
 							</DropdownButton>
 							<DropdownMenu className="min-w-64" anchor="bottom end">
@@ -161,7 +180,6 @@ export function Navigation({
 										initials={
 											!user?.avatar ? user?.name?.[0]?.toUpperCase() : undefined
 										}
-										square
 										alt=""
 									/>
 									<span className="min-w-0">

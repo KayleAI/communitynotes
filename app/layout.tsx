@@ -9,8 +9,12 @@ import clsx from "clsx";
 import Providers from "./providers";
 
 export const metadata: Metadata = {
-	title: "CommunityNotes.dev",
-	description: "Easily create your next app.",
+	title: {
+		template: "%s - Community Notes",
+		default: "Community Notes by Kayle",
+	},
+	description:
+		"Easily implement Community Notes in your community. Powered by Kayle.",
 };
 
 export default function RootLayout({
