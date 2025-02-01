@@ -52,7 +52,7 @@ export default function SignInClient() {
 
 	return (
 		<div className="h-dvh flex items-center justify-center">
-			<div className="w-full max-w-md p-8 bg-white shadow-lg rounded-xl">
+			<div className="w-full max-w-md p-8 bg-white dark:bg-black shadow-lg rounded-xl">
 				<Fieldset>
 					<Legend>Sign in to Make Next App</Legend>
 					<Text>Enter your email address to sign in.</Text>
@@ -84,6 +84,7 @@ export default function SignInClient() {
 							<Button
 								type="button"
 								className="w-full py-2.5 px-4"
+								color="dark/white"
 								onClick={requestOtp}
 							>
 								Continue with Email
