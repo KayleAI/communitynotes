@@ -29,7 +29,6 @@ import {
 	SidebarSection,
 	SidebarSpacer,
 } from "@/ui/sidebar";
-import { SidebarLayout } from "@/ui/sidebar-layout";
 
 // Icons
 import {
@@ -51,6 +50,7 @@ import {
 import { useAuth } from "@/utils/auth/provider";
 import { useHotkeys } from "@mantine/hooks";
 import { useTheme } from "next-themes";
+import { StackedLayout } from "@/ui/stacked-layout";
 
 export function Navigation({
 	children,
@@ -75,7 +75,7 @@ export function Navigation({
 	useHotkeys([["d", switchToHome]]);
 
 	return (
-		<SidebarLayout
+		<StackedLayout
 			navbar={
 				<Navbar>
 					<NavbarSpacer />
@@ -118,7 +118,7 @@ export function Navigation({
 					<SidebarHeader>
 						<SidebarSection>
 							<SidebarItem href="/home">
-								<SidebarLabel>Make Next App</SidebarLabel>
+								<SidebarLabel>CommunityNotes.dev</SidebarLabel>
 							</SidebarItem>
 						</SidebarSection>
 					</SidebarHeader>
@@ -205,6 +205,6 @@ export function Navigation({
 			}
 		>
 			{children}
-		</SidebarLayout>
+		</StackedLayout>
 	);
 }

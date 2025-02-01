@@ -1,5 +1,8 @@
-Build your next project with ease.
+Keep your community safe from misinformation.
 
-# Make Next App
+# Community Notes (.dev)
 
-This project gives you a boilerplate to build your next project with ease.
+Community Notes by Kayle uses the principles of Twitter‘s Community Notes
+to provide a service to allow other communities and platforms to introduce 
+a community notes feature.
+

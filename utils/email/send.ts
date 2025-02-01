@@ -24,7 +24,7 @@ export async function sendEmail({
 	text,
 }: Readonly<Email>): Promise<string | null> {
 	const { data, error } = await resend.emails.send({
-		from: from ?? "Make Next App <onboarding@resend.dev>",
+		from: from ?? "Community Notes <noreply@mail.communitynotes.dev>",
 		to: to,
 		subject: subject,
 		react: react ?? undefined,

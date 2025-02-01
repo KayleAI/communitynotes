@@ -54,7 +54,7 @@ export default function SignInClient() {
 		<div className="h-dvh flex items-center justify-center">
 			<div className="w-full max-w-md p-8 bg-white dark:bg-black shadow-lg rounded-xl border border-zinc-950/10 dark:border-white/10">
 				<Fieldset>
-					<Legend>Sign in to Make Next App</Legend>
+					<Legend>Sign in to CommunityNotes.dev</Legend>
 					<Text>Enter your email address to sign in.</Text>
 					<FieldGroup>
 						<Field>

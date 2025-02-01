@@ -31,7 +31,7 @@ function MarketingNavbar() {
 							d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"
 						/>
 					</svg>
-					<span className="font-semibold">Make Next App</span>
+					<span className="font-semibold">CommunityNotes.dev</span>
 				</NavbarItem>
 			</NavbarSection>
 			<NavbarSpacer />
@@ -48,7 +48,7 @@ function MarketingSidebar() {
 			<SidebarHeader>
 				<SidebarSection>
 					<SidebarItem href="/">
-						<SidebarLabel>Make Next App</SidebarLabel>
+						<SidebarLabel>CommunityNotes.dev</SidebarLabel>
 					</SidebarItem>
 				</SidebarSection>
 			</SidebarHeader>
@@ -88,17 +88,18 @@ export default function MarketingPage() {
 				<div className="mx-auto max-w-2xl text-center">
 					<Badge className="mb-4">Now in beta</Badge>
 					<Heading level={1} className="mt-4 mb-6">
-						Make Next App
+						CommunityNotes.dev
 					</Heading>
 					<Text className="mb-8">
-						Build beautiful, fast, and modern web applications with our
-						carefully crafted components and intuitive design system.
+						Community Notes by Kayle uses the principles of Twitter‘s Community
+						Notes to provide a service to allow other communities and platforms
+						to introduce a community notes feature.
 					</Text>
 					<div className="flex items-center justify-center gap-4">
 						<Button color="blue" href="/sign-in">
 							Get Started
 						</Button>
-						<Button outline href="https://github.com/arsenstorm">
+						<Button outline href="https://github.com/kayleai/communitynotes">
 							GitHub &rarr;
 						</Button>
 					</div>

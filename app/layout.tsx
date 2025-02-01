@@ -9,7 +9,7 @@ import clsx from "clsx";
 import Providers from "./providers";
 
 export const metadata: Metadata = {
-	title: "Make Next App",
+	title: "CommunityNotes.dev",
 	description: "Easily create your next app.",
 };
 

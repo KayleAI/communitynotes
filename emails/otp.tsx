@@ -55,7 +55,7 @@ export default function OTPVerificationEmail({
 					<Container className="mx-auto py-12 px-4 max-w-[600px]">
 						<Section className="bg-white rounded-2xl shadow-lg border border-zinc-100 p-8 mx-auto">
 							<Heading className="text-3xl font-bold text-zinc-900 mb-6 font-[Inter,Helvetica,system-ui] text-center">
-								Make Next App
+								CommunityNotes.dev
 							</Heading>
 
 							<Text className="text-zinc-600 mb-8 text-center text-lg">
