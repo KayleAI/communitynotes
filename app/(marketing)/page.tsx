@@ -13,6 +13,7 @@ import {
 	SidebarLabel,
 	SidebarFooter,
 } from "@/ui/sidebar";
+import { Card } from "@/ui/card";
 
 function MarketingNavbar() {
 	return (
@@ -33,6 +34,7 @@ function MarketingNavbar() {
 					</svg>
 					<span className="font-semibold">Community Notes by Kayle</span>
 				</NavbarItem>
+				<NavbarItem href="/docs">Docs</NavbarItem>
 			</NavbarSection>
 			<NavbarSpacer />
 			<NavbarSection>
@@ -83,14 +85,14 @@ function MarketingSidebar() {
 export default function MarketingPage() {
 	return (
 		<StackedLayout navbar={<MarketingNavbar />} sidebar={<MarketingSidebar />}>
-			{/* Hero Section */}
-			<div className="px-6 lg:px-8 py-24 sm:py-32">
-				<div className="mx-auto max-w-2xl text-center">
+			<div className="max-w-4xl mx-auto px-6 py-12">
+				{/* Hero Section */}
+				<div className="text-center mb-12">
 					<Badge className="mb-4">Now in beta</Badge>
-					<Heading level={1} className="mt-4 mb-6">
+					<Heading level={1} className="mb-4">
 						Community Notes by Kayle
 					</Heading>
-					<Text className="mb-8">
+					<Text className="text-lg mb-8 max-w-2xl mx-auto text-center px-4">
 						Community Notes by Kayle uses the principles of Twitter‘s Community
 						Notes to provide a service to allow other communities and platforms
 						to introduce a community notes feature.
@@ -104,47 +106,75 @@ export default function MarketingPage() {
 						</Button>
 					</div>
 				</div>
-			</div>
 
-			<Divider />
+				<Divider />
 
-			{/* Features Section */}
-			<div className="py-24 sm:py-32">
-				<div className="mx-auto max-w-7xl">
-					<div className="text-center mb-16">
-						<Heading level={2}>Why Choose Our Platform</Heading>
+				{/* Not a developer section */}
+				<div className="my-12">
+					<div className="text-center mb-8">
+						<Heading level={2} className="mb-4">
+							Not a developer?
+						</Heading>
+						<Text className="text-lg mb-8 max-w-2xl mx-auto text-center">
+							We‘ve created an extension that allows you to add Community Notes
+							to any website for personal use in the fight against
+							misinformation.
+						</Text>
+					</div>
+
+					<Card className="p-6">
+						<Heading level={3}>Browser Extension</Heading>
+						<Text className="mb-4">
+							Install our browser extension to instantly add Community Notes to
+							any website.
+						</Text>
+						<Button outline href="/extension">
+							Get the Extension
+						</Button>
+					</Card>
+				</div>
+
+				<Divider />
+
+				{/* Features Section */}
+				<div className="my-12">
+					<div className="text-center mb-8">
+						<Heading level={2} className="mb-4">
+							Why Choose Our Platform
+						</Heading>
 						<Text>
 							Everything you need to implement community-driven content
 							moderation
 						</Text>
 					</div>
 
-					<div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+					<div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 						{features.map((feature) => (
-							<div
-								key={feature.title}
-								className="p-6 rounded-lg border border-zinc-950/10 dark:border-white/10"
-							>
+							<Card key={feature.title} className="p-6">
 								<Heading level={3}>{feature.title}</Heading>
 								<Text>{feature.description}</Text>
-							</div>
+							</Card>
 						))}
 					</div>
 				</div>
-			</div>
 
-			{/* CTA Section */}
-			<div className="py-24 sm:py-32 border border-zinc-950/10 dark:border-white/10 rounded-lg">
-				<div className="mx-auto max-w-2xl text-center">
-					<Badge className="mb-4">Now in beta</Badge>
-					<Heading level={2}>Ready to get started?</Heading>
-					<Text className="mt-4">
-						Join forward-thinking platforms that trust their communities to
-						maintain content integrity
-					</Text>
-					<Button color="blue" className="mt-8" href="/sign-in">
-						Start Building Today
-					</Button>
+				<Divider />
+
+				{/* CTA Section */}
+				<div className="my-12">
+					<div className="text-center">
+						<Badge className="mb-4">Now in beta</Badge>
+						<Heading level={2} className="mb-4">
+							Ready to get started?
+						</Heading>
+						<Text className="mb-8">
+							Join forward-thinking platforms that trust their communities to
+							maintain content integrity
+						</Text>
+						<Button color="blue" href="/sign-in">
+							Start Building Today
+						</Button>
+					</div>
 				</div>
 			</div>
 		</StackedLayout>
