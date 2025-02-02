@@ -1,3 +1,6 @@
+"use client";
+
+// UI
 import { Navbar, NavbarItem, NavbarSection, NavbarSpacer } from "@/ui/navbar";
 import {
 	Sidebar,
@@ -8,7 +11,12 @@ import {
 } from "@/ui/sidebar";
 import { StackedLayout } from "@/ui/stacked-layout";
 
-function DocsNavbar() {
+// Utils
+import { useAuth } from "@/utils/auth/provider";
+
+function DocsNavbar({
+	status,
+}: Readonly<{ status: "authenticated" | "pending" | "unauthenticated" }>) {
 	return (
 		<Navbar>
 			<NavbarSection>
@@ -33,7 +41,11 @@ function DocsNavbar() {
 				<NavbarItem href="https://github.com/kayleai/communitynotes">
 					GitHub
 				</NavbarItem>
-				<NavbarItem href="/sign-in">Sign In</NavbarItem>
+				{status === "authenticated" ? (
+					<NavbarItem href="/home">Dashboard</NavbarItem>
+				) : (
+					<NavbarItem href="/sign-in">Sign In</NavbarItem>
+				)}
 			</NavbarSection>
 		</Navbar>
 	);
@@ -104,8 +116,13 @@ function DocsSidebar() {
 export default function DocsLayout({
 	children,
 }: Readonly<{ children: React.ReactNode }>) {
+	const { status } = useAuth();
+
 	return (
-		<StackedLayout navbar={<DocsNavbar />} sidebar={<DocsSidebar />}>
+		<StackedLayout
+			navbar={<DocsNavbar status={status} />}
+			sidebar={<DocsSidebar />}
+		>
 			{children}
 		</StackedLayout>
 	);
