@@ -1,0 +1,26 @@
+{
+	"manifest_version": 3,
+	"name": "Community Notes",
+	"version": "1.0.0",
+	"description": "View and create community notes on any website",
+	"permissions": ["activeTab", "storage", "contextMenus"],
+	"host_permissions": [
+		"*://*/*",
+		"http://localhost:3000/*",
+		"https://community-notes.vercel.app/*"
+	],
+	"action": {
+		"default_popup": "popup.html"
+	},
+	"content_scripts": [
+		{
+			"matches": ["<all_urls>"],
+			"js": ["content.js"],
+			"css": ["styles.css"]
+		}
+	],
+	"background": {
+		"service_worker": "background.js",
+		"type": "module"
+	}
+}

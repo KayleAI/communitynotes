@@ -1,0 +1,14 @@
+{
+	"name": "community-notes-extension",
+	"version": "1.0.0",
+	"description": "Chrome extension for Community Notes",
+	"scripts": {
+		"build:css": "tailwindcss -i ./src/input.css -o ./styles.css --watch",
+		"build": "tailwindcss -i ./src/input.css -o ./styles.css"
+	},
+	"devDependencies": {
+		"tailwindcss": "^3.4.1",
+		"autoprefixer": "^10.4.17",
+		"postcss": "^8.4.35"
+	}
+}

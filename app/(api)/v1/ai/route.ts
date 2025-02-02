@@ -28,6 +28,7 @@ export async function POST(request: NextRequest) {
 		const result = aiSchema.safeParse(body);
 
 		if (!result.success) {
+			console.log("Invalid input", result.error.issues);
 			return NextResponse.json(
 				{ error: "Invalid input", details: result.error.issues },
 				{ status: 400 },
@@ -39,6 +40,7 @@ export async function POST(request: NextRequest) {
 		const context = await createNoteUsingAi(content);
 
 		if (!context) {
+			console.log("AI chose not to create a note.");
 			return NextResponse.json({
 				status: "no_note",
 				message: "AI chose not to create a note.",
@@ -56,9 +58,8 @@ export async function POST(request: NextRequest) {
 					name: "Perplexity AI",
 				},
 				{
-					onConflict: "external_id,user_id",
-					ignoreDuplicates: true,
-				},
+					onConflict: 'user_id,external_id'
+				}
 			)
 			.select("id")
 			.single();
@@ -66,6 +67,7 @@ export async function POST(request: NextRequest) {
 		const authorId = authorData?.id;
 
 		if (authorError) {
+			console.error("Failed to create author", authorError);
 			return NextResponse.json(
 				{ error: "Failed to create author" },
 				{
@@ -86,6 +88,7 @@ export async function POST(request: NextRequest) {
 			.single();
 
 		if (error) {
+			console.log("Failed to create note", error);
 			return NextResponse.json(
 				{ error: "Failed to create note" },
 				{
@@ -96,6 +99,7 @@ export async function POST(request: NextRequest) {
 
 		return NextResponse.json({ status: "created", id: data.id });
 	} catch (error) {
+		console.error(error);
 		return NextResponse.json({ error: "Invalid JSON" }, { status: 400 });
 	}
 }
@@ -107,7 +111,7 @@ async function createNoteUsingAi(query: string) {
 			{
 				role: "system",
 				content:
-					"You are a helpful assistant that creates Community Notes that provide context for a given piece of text. Where possible, you should cite reputable sources to support your note. If you are unable to find any relevant information, or if the information submitted by the user is reasonable and does not need a note, return `no_note`.",
+					"You are a helpful assistant that creates Community Notes that provide context for a given piece of text. Where possible, you should cite reputable sources to support your note. If you are unable to find any relevant information, or if the information submitted by the user is reasonable and does not need a note, return `no_note`. You may also be provided with a URL to the page that the user is looking at, and you should also judge this as part of your decision to create a note.",
 			},
 			{
 				role: "user",
@@ -119,7 +123,7 @@ async function createNoteUsingAi(query: string) {
 	const citations =
 		(experimental_providerMetadata?.perplexity?.citations as string[]) ?? [];
 
-	if (text === "no_note") {
+	if (text.includes("no_note")) {
 		return null;
 	}
 
