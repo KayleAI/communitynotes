@@ -58,9 +58,12 @@ export default function ConceptsPage() {
 						<Card className="p-6">
 							<Heading level={3}>Chrome</Heading>
 							<Text>
-								Our Chrome extension is available on the{" "}
-								<DocsLink href="https://chrome.google.com/webstore/">
-									Chrome Web Store
+								Our Chrome extension is coming soon to the Chrome Web Store.
+							</Text>
+							<Text>
+								For now, you can install the extension from the{" "}
+								<DocsLink href="https://github.com/KayleAI/communitynotes/releases/latest">
+									GitHub Releases
 								</DocsLink>
 								{"."}
 							</Text>
