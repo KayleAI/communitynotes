@@ -1,0 +1,41 @@
+name: Create Extension Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
+          
+      - name: Install Dependencies
+        working-directory: ./extension
+        run: bun install
+        
+      - name: Create Extension ZIP
+        run: |
+          cd extension
+          zip -r ../extension.zip ./*
+          
+      - name: Create Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: extension.zip
+          generate_release_notes: true
+          draft: false
+          prerelease: false
